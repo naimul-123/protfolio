@@ -29,7 +29,17 @@ body {
   }
 }
 
-.menu-li:hover {
-  background-color: #a566e0;
+.link-gradient {
+  background: linear-gradient(to right, #1a1a1a, #1a1a1a);
+  background-size: 200% 200%;
+  background-position: right bottom;
+  transition: background-position 1s ease-in-out, background 1s ease-in-out;
+
+}
+
+.link-gradient:hover {
+  background: linear-gradient(to right, #8b16da, #6308da);
+  background-position: left bottom;
+
 
 }

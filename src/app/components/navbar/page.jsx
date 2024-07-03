@@ -1,58 +1,92 @@
 "use client"
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { FaBars } from "react-icons/fa6";
 import logo from '@/../public/logo.gif'
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [activeSec, setActiveSec] = useState('#')
+
+
+    useEffect(() => {
+        const handleHasChange = () => {
+            setActiveSec(window.location.hash);
+        }
+
+        window.addEventListener('hashchange', handleHasChange);
+        return () => {
+            window.removeEventListener('hashchange', handleHasChange)
+        }
+    }, []);
+
+    const handleActiveLink = (id) => {
+        setActiveSec(`#${id}`);
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    console.log(activeSec);
+    // console.log(router);
     const navLinks = <>
-        <li className='group px-4 py-2 hover:bg-gray-900' ><Link className='text-white text-lg font-bold' href="/services">Service</Link>
-            <div className='group-hover:bg-gradient-to-r h-1 from-purple-500 to-purple-800 ease-in-out duration-500 transform scale-x-0 group-hover:scale-x-100 origin-left   '></div>
+        <li className={`px-4 py-2 hover:bg-purple-500 hover:text-white font-bold {${activeSec === '#services' ? "text-white bg-purple-600" : ""}`} onClick={() => handleActiveLink('services')} ><Link className='hover:bg-transparent' href="#services">Service</Link>
         </li>
-        <li className='group px-4 py-2 hover:bg-gray-900' ><Link className='text-white text-lg font-bold' href="/work">Work</Link>
-            <div className='group-hover:bg-gradient-to-r h-1 from-purple-500 to-purple-800 ease-in-out duration-500 transform scale-x-0 group-hover:scale-x-100 origin-left   '></div>
+        <li className={`px-4 py-2 hover:bg-purple-500 hover:text-white font-bold {${activeSec === '#works' ? "text-white bg-purple-600" : ""}`} onClick={() => handleActiveLink('works')} ><Link className='hover:bg-transparent' href="#works">Work</Link>
         </li>
-        <li className='group px-4 py-2 hover:bg-gray-900' ><Link className='text-white text-lg font-bold' href="/resume">Resume</Link>
-            <div className='group-hover:bg-gradient-to-r h-1 from-purple-500 to-purple-800 ease-in-out duration-500 transform scale-x-0 group-hover:scale-x-100 origin-left   '></div>
+        <li className={`px-4 py-2 hover:bg-purple-500 hover:text-white font-bold {${activeSec === '#resume' ? "text-white bg-purple-600" : ""}`} onClick={() => handleActiveLink('resume')} ><Link className='hover:bg-transparent' href="#resume">Resume</Link>
         </li>
-        <li className='group px-4 py-2 hover:bg-gray-900' ><Link className='text-white text-lg font-bold' href="/skills">Skills</Link>
-            <div className='group-hover:bg-gradient-to-r h-1 from-purple-500 to-purple-800 ease-in-out duration-500 transform scale-x-0 group-hover:scale-x-100 origin-left   '></div>
+        <li className={`px-4 py-2 hover:bg-purple-500 hover:text-white font-bold {${activeSec === '#skills' ? "text-white bg-purple-600" : ""}`} onClick={() => handleActiveLink('skills')} ><Link className='hover:bg-transparent' href="#skills">Skills</Link>
         </li>
-        <li className='group px-4 py-2 hover:bg-gray-900 ' ><Link className='text-white text-lg font-bold' href="/testimonials">Testimonials</Link>
-            <div className='group-hover:bg-gradient-to-r h-1 from-purple-500 to-purple-800 ease-in-out duration-500 transform scale-x-0 group-hover:scale-x-100 origin-left   '></div>
+        <li className={`px-4 py-2 hover:bg-purple-500 hover:text-white font-bold {${activeSec === '#testimonials' ? "text-white bg-purple-600" : ""}`} onClick={() => handleActiveLink('testimonials')} ><Link className='hover:bg-transparent' href="#testimonials">Testimonials</Link>
         </li>
-        <li className='group px-4 py-2 hover:bg-gray-900' ><Link className='text-white text-lg font-bold' href="/contact">Contact</Link>
-            <div className='group-hover:bg-gradient-to-r h-1 from-purple-500 to-purple-800 ease-in-out duration-500 transform scale-x-0 group-hover:scale-x-100 origin-left   '></div>
+        <li className={`px-4 py-2 hover:bg-purple-500 hover:text-white font-bold {${activeSec === '#contact' ? "text-white bg-purple-600" : ""}`} onClick={() => handleActiveLink('contact')} ><Link className='hover:bg-transparent' href="#contact">Contact</Link>
         </li>
     </>
     const handleMenuBar = () => {
         setIsOpen(!isOpen)
     }
-    return (
-        <div className='flex justify-between items-center bg-black py-3 fixed top-0 z-40 w-full mx-auto max-w-screen-2xl px-6'>
-            <div className='relative'>
-                <div className='flex gap-1 items-center'>
-                    <button onClick={handleMenuBar} className='btn btn-square'><FaBars className='text-lg' /></button>
-                    <h2 className=" text-4xl text-purple-600 text- font-bold ">Naimul Islam</h2>
-                    {/* <Image src={logo} alt='logo' width="60" height="60" /> */}
 
-                </div>
-                <div className={`absolute ${isOpen ? "block" : "hidden"} md:hidden  top-20 left-2`}>
-                    <ul className='w-full  max-w-md flex flex-col bg-gray-300 space-y-2 '>
+    return (
+
+        <div className="navbar bg-black text-white sticky top-0 z-50 h-10">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
+                    </div>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm bg-gray-950 dropdown-content rounded-box z-[1] mt-3 w-[70vw] p-2 shadow">
                         {navLinks}
                     </ul>
                 </div>
+                <Link href="#" className="btn btn-ghost text-xl">Naimul Islam</Link>
             </div>
-            <div className='hidden md:block'>
-                <ul className='flex gap-0'>
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal px-1">
                     {navLinks}
                 </ul>
             </div>
-            <div>
+            <div className="navbar-end">
                 <button className='btn bg-gradient-to-r hover:bg-gradient-to-l text-white text-lg to-purple-800 from-purple-500  border-0'>Hire Me</button>
+
             </div>
         </div>
+
     );
 };
 

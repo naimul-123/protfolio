@@ -5,12 +5,12 @@ import { FaDownload, FaFacebook, FaFacebookF, FaGithubAlt, FaLinkedinIn } from '
 import Link from 'next/link';
 const Hero = () => {
     return (
-        <div className="hero w-full">
+        <div className="hero my-12">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <Image
                     src={myImage}
                     alt='Naimul Islam'
-                    className="max-w-sm hover:outline-4 outline   outline-2 outline-purple-500 hover:transform hover:rotate-2 duration-500 hover:scale-105 ease-in-out rounded-lg shadow-2xl" />
+                    className="max-w-sm hover:outline-4 outline   outline-2 outline-purple-500 hover:transform hover:rotate-2 duration-500 hover:scale-105 ease-in-out rounded-3xl shadow-2xl" />
                 <div>
                     <h2 className="text-4xl font-bold">Hi, I am Naimul Islam</h2>
                     <h1 className="text-6xl font-bold ">Frontend Web Developer</h1>
@@ -22,10 +22,12 @@ const Hero = () => {
                         <Link href="https://www.facebook.com/naimuliu/" className=" text-4xl btn btn-circle btn-md rounded-full hover:bg-purple-500 border-purple-500  hover:border-purple-500  text-purple-500 hover:text-white  transform ease-in-out duration-1000   "><FaFacebookF /></Link>
                         <Link href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" className=" text-4xl btn btn-circle btn-md rounded-full hover:bg-purple-500 border-purple-500 hover:border-purple-500  text-purple-500 hover:text-white  transform ease-in-out duration-1000   "><FaLinkedinIn /></Link>
                         <Link href="https://github.com/naimul-123" className=" text-4xl btn btn-circle btn-md rounded-full hover:bg-purple-500 border-purple-500 hover:border-purple-500  text-purple-500 hover:text-white  transform ease-in-out duration-1000   "><FaGithubAlt /></Link>
-
                     </div>
+
                 </div>
+
             </div>
+
         </div>
     );
 };
